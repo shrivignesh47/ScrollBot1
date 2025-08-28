@@ -1,93 +1,3 @@
-# # from PyPDF2 import PdfReader
-# # from langchain.text_splitter import RecursiveCharacterTextSplitter
-# # import os
-# # from langchain_google_genai import GoogleGenerativeAIEmbeddings
-# # from langchain_community.vectorstores import FAISS
-# # from langchain_google_genai import GoogleGenerativeAIEmbeddings
-# # import google.generativeai as genai
-# # from dotenv import load_dotenv
-
-# # load_dotenv()
-# # os.getenv("GOOGLE_API_KEY")
-# # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-
-# # def get_pdf_text(pdf_docs):
-# #     text = ""
-# #     for pdf in pdf_docs:
-# #         pdf_reader = PdfReader(pdf)
-# #         for page in pdf_reader.pages:
-# #             text += page.extract_text()
-# #     return text
-
-# # def get_text_chunks(text):
-# #     text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
-# #     chunks = text_splitter.split_text(text)
-# #     return chunks
-
-# # def get_vector_store(text_chunks):
-# #     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-# #     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-# #     vector_store.save_local("faiss_index")
-
-# # raw_text = get_pdf_text([r"C:\Users\srith\Downloads\rinvoq_pi.pdf"])
-# # text_chunks = get_text_chunks(raw_text)
-# # get_vector_store(text_chunks)
-
-
-# # pdf_processor.py
-# from PyPDF2 import PdfReader
-# from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain.schema import Document
-# from langchain_google_genai import GoogleGenerativeAIEmbeddings
-# from langchain_community.vectorstores import FAISS
-# import os
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# def create_vector_store():
-#     pdf_path = r"C:\Users\srith\Downloads\rinvoq_pi.pdf"  # ← Update if needed
-
-#     if not os.path.exists(pdf_path):
-#         print(f"❌ PDF not found: {pdf_path}")
-#         return
-
-#     print("📄 Reading PDF...")
-#     pdf_reader = PdfReader(pdf_path)
-#     raw_docs = []
-
-#     for i, page in enumerate(pdf_reader.pages):
-#         text = page.extract_text()
-#         if text and text.strip():
-#             raw_docs.append(
-#                 Document(
-#                     page_content=text,
-#                     metadata={
-#                         "page": i + 1,
-#                         "source": os.path.basename(pdf_path)
-#                     }
-#                 )
-#             )
-
-#     print(f"✅ Extracted {len(raw_docs)} pages with metadata")
-
-#     # Split
-#     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-#     chunks = text_splitter.split_documents(raw_docs)
-#     print(f"✂️  Split into {len(chunks)} chunks")
-
-#     # Embed and save
-#     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-#     vector_store = FAISS.from_documents(chunks, embedding=embeddings)
-#     vector_store.save_local("faiss_index")
-
-#     print("🎉 FAISS index saved with metadata!")
-#     print("📌 Sample:", chunks[0].metadata, " | Preview:", chunks[0].page_content[:100])
-
-# if __name__ == "__main__":
-#     create_vector_store()
-
-
 
 # pdf_processor.py
 from PyPDF2 import PdfReader
@@ -104,8 +14,7 @@ load_dotenv()
 def create_vector_store():
     # ✅ Add all your PDFs here
     pdf_paths = [
-        r"C:\Users\srith\Downloads\rinvoq_pi.pdf",
-        r"C:\Users\srith\Downloads\Current Essentials of Medicine(1)(1).pdf"
+        r"D:\rinvoq_pi.pdf"
     ]
 
     raw_docs = []
